@@ -1,4 +1,5 @@
-环境
+#环境
+
 flask=0.12.2
 celery=4.1.0
 rabbitmq=3.5.3
