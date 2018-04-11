@@ -2,9 +2,10 @@
 from __future__ import print_function, unicode_literals, absolute_import
 
 import os
-
+# urllib by python3.5
+from urllib.request import urlretrieve
+from ansible.errors import AnsibleParserError
 import yaml
-
 from config import BaseConfig
 
 
@@ -35,7 +36,7 @@ def load_pb(file_name=None, file_type=None, *args, **kwargs):
     return to_json
 
 
-def pb_prepare(pb_name=None, pb_type=None, pb_key='template'):
+def pb_prepare(pb_name=None, pb_type=None, pb_key=None):
     try:
         check_file(pb_name, pb_type) or get_playbook(pb_name, pb_type)
         pb_json = load_pb(pb_name, pb_type)
@@ -56,7 +57,8 @@ def get_playbook(pb_name=None, pb_type=None):
     try:
         url_path = os.path.join(BaseConfig.PLAYBOOK_SERVER, pb_type)
         url_file = os.path.join(url_path, pb_name)
-        work_path = os.path.join(BaseConfig.PLAYBOOK_DIR, pb_name)
+        work_type = os.path.join(BaseConfig.PLAYBOOK_DIR, pb_type)
+        work_path = os.path.join(work_type, pb_name)
         urlretrieve(url_file, work_path)
     except:
         print("{0} downloads playbook error!".format(pb_name))

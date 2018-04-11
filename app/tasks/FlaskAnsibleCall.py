@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals, absolute_import
 
-from flask import Flask
-from flask_restful import reqparse, abort, Resource, Api
-
 from app.tasks.CeleryAnsibleCall import callansibleRun, callansiblePlookbook, add_together
+from flask_restful import reqparse, abort, Resource, Api
+from flask import Flask
 
 app = Flask(__name__)
 api = Api(app)
@@ -34,7 +33,7 @@ class Add(Resource):
 
 class AnsibleRunCmd(Resource):
     def __init__(self):
-        super(AnsibleRunCmd, self).__init__()
+        super().__init__()
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('data', type=dict, required=True,
                                    help='No data provided', location='json')
@@ -48,7 +47,7 @@ class AnsibleRunCmd(Resource):
 
 class AnsibleRunPlaybook(Resource):
     def __init__(self):
-        super(AnsibleRunPlaybook, self).__init__()
+        super().__init__()
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('data', type=dict, required=True,
                                    help='No data provided', location='json')
@@ -87,8 +86,8 @@ class TaskStatus(Resource):
                 'state': task.state,
                 'status': task.info
             }
-            if 'result' in task.info:
-                response['result'] = task.info['result']
+            # if 'result' in task.info:
+            #   response['result'] = task.info['result']
         else:
             # something went wrong in the background job
             response = {

@@ -106,8 +106,8 @@ if __name__ == '__main__':
     logger = logging.getLogger('myapp')
 
     #logger.error('Log Redis Failed: %s' % e.message)
-    logger.debug('logger debug message')  
-    logger.info('logger info message')  
-    logger.warning('logger warning message')  
-    logger.error('logger error message')  
-    logger.critical('logger critical message') 
+    logger.debug('logger debug message')
+    logger.info('logger info message')
+    logger.warning('logger warning message')
+    logger.error('logger error message')
+    logger.critical('logger critical message')
